@@ -17,12 +17,14 @@ class Value:
         out = Value(self.data * other.data, (self, other), '*')
         return out
     
-    L.grad = 1.0
+    # f.grad = 4.0
+    # d.grad = -2.0
+    # L.grad = 1.0
     
     @staticmethod
     def lol():
 
-        h = 0.0001
+        h = 0.001
 
         a = Value(2.0)
         b = Value(-3.0)
@@ -32,10 +34,12 @@ class Value:
         L = d * f
         L1 = L.data
 
-        a = Value(2.0 + h)
+        a = Value(2.0)
         b = Value(-3.0)
         c = Value(10)
+        c.data += h 
         d = (a * b) + c
+        #d.data += h
         f = Value(-2.0)
         L = d * f
         L2 = L.data

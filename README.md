@@ -61,3 +61,8 @@ o.backward()
 
 # Gradients
 print(x1.grad, w1.grad, b.grad)
+```
+### Running the demo
+```bash
+python test.py
+```

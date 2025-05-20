@@ -47,7 +47,7 @@ def test_neuron():
     w1 = Value(-3.0)
     w2 = Value(1.0)
     #bias
-    b = Value(6.7)
+    b = Value(6.881)
     x1w1 = x1 * w1
     x2w2 = x2 * w2
 
@@ -56,9 +56,14 @@ def test_neuron():
     n = x1w1x2w2 + b
 
     o = n.tanh()
+    o.grad = 1.0
+    #return 1-o.data**2, o.grad
+    n.grad = o.grad * (1-o.data**2)
+    return n.grad
+    return o
 
 if __name__ == "__main__":
     print(testing())
-
+    print(test_neuron())
 # plt.plot(np.arange(-5, 5, 0.2), np.tanh(np.arange(-5, 5, 0.2))) , plt.grid();
 # plt.show()

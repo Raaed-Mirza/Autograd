@@ -1,4 +1,5 @@
 from engine import Value
+import math
 class Operations(Value):
 
     def __add__(self, other):
@@ -18,4 +19,8 @@ class Operations(Value):
 
     def __neg__(self):
         return Operations(-self.data, (self,), 'neg')
+
+    def tanh(self):
+        n = self.data
+        return Operations((math.exp(2*n)-1)/(math.exp(2*n)+1), (self, ), 'tanh')
         

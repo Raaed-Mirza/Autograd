@@ -1,4 +1,4 @@
-# 🧠 TinyFlow - A Minimal Autograd Engine
+# 🧠 A Minimal Autograd Engine
 
 TinyFlow is a simple, educational autograd engine inspired by [micrograd](https://github.com/karpathy/micrograd).  
 It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and performs backpropagation to compute gradients — just like PyTorch under the hood.

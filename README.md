@@ -18,6 +18,25 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 - Easily extensible with new ops like `ReLU`, `sigmoid`, etc.
 
 ---
+## 📁 Project Structure
+```
+.
+├── engine.py         # Core autograd engine with the Value class
+├── test.py           # Demo script that simulates a simple neuron
+├── README.md         # Project documentation
+```
+---
+
+## 📦 Installation
+```bash
+git clone https://github.com/yourusername/micrograd-python.git
+```
+```bash
+cd micrograd-python
+```
+```bash
+pip install -r requirements.txt
+```
 
 ## 🧪 Example
 

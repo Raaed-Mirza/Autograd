@@ -1,3 +1,4 @@
+import math
 class Value:
 
     def __init__(self, data, _children=(), _op=''): #_childern is a tuple used to store the inputs (or parents) of the current node
@@ -53,7 +54,23 @@ class Value:
         out = Value(t, (self,), 'tanh')
         
         def _backward():
-            self.grad = 1.0 * (1 - t**2) * out.grad
+            self.grad += 1.0 * (1 - t**2) * out.grad
         out._backward = _backward
 
         return out
+
+    def backward(self):
+        topo = []
+        visited = set()
+        def build_topo(v):
+            if v not in visited:
+                visited.add(v)
+                for child in v.prev:
+                    build_topo(child)
+                topo.append(v)
+        build_topo(self)
+
+        self.grad = 1.0
+        for v in reversed(topo):
+            v._backward()
+

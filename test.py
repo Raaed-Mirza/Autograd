@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from operations import Operations as Value
+from engine import Value
 # f.grad = 4.0
 # d.grad = -2.0
 # L.grad = 1.0
@@ -57,10 +57,22 @@ def test_neuron():
 
     o = n.tanh()
     o.grad = 1.0
+    o.backward()
+    return {
+        'o': o.data,
+        'n': n.data,
+        'x1.grad': x1.grad,
+        'x2.grad': x2.grad,
+        'w1.grad': w1.grad,
+        'w2.grad': w2.grad,
+        'b.grad': b.grad,
+        'n.grad': n.grad,
+        'o.grad': o.grad
+    }
     #return 1-o.data**2, o.grad
-    n.grad = o.grad * (1-o.data**2)
-    return n.grad
-    return o
+    # n.grad = o.grad * (1-o.data**2)
+    # return n.grad
+    # return o
 
 if __name__ == "__main__":
     print(testing())

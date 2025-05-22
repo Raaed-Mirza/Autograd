@@ -37,11 +37,23 @@ class Value:
     def __sub__(self, other):
         other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data - other.data, (self, other), '-')
+
+        def _backward():
+            self.grad += 1.0 * out.grad
+            other.grad += -1.0 * out.grad
+        out._backward = _backward
+
         return out
 
     def __truediv__(self, other): 
         other = other if isinstance(other, Value) else Value(other)  
         out = Value(self.data / other.data, (self, other), '/')
+
+        def _backward():
+            self.grad += (1.0 / other.data) * out.grad
+            other.grad += (-self.data / (other.data ** 2)) * out.grad
+        out._backward = _backward
+
         return out
 
     def __pow__(self, other):
@@ -49,11 +61,19 @@ class Value:
         out = Value(self.data ** other.data, (self, other), '^')
 
         def _backward():
-            self.grad += other.data * (self.data **(other.data - 1)) * out.grad
+            self.grad += other.data * (self.data ** (other.data - 1)) * out.grad
+            other.grad += math.log(self.data) * (self.data ** other.data) * out.grad
+        out._backward = _backward
+
         return out
 
     def __neg__(self):
         out = Value(-self.data, (self,), 'neg')
+
+        def _backward():
+            self.grad += -1 * out.grad
+        out._backward = _backward
+
         return out
 
     def __rmul__(self, other):
@@ -86,6 +106,8 @@ class Value:
         def _backward():
             self.grad += out.data * out.grad
         out._backward = _backward
+
+        return out
 
     def backward(self):
         topo = []

@@ -55,7 +55,12 @@ def test_neuron():
     # x1*w1 + x2*w2 + b
     n = x1w1x2w2 + b
 
-    o = n.tanh()
+    e = (2*n).exp()
+
+    o = (e - 1) / (e + 1)
+
+    
+
     o.grad = 1.0
     o.backward()
     return {
@@ -77,8 +82,5 @@ def test_neuron():
 if __name__ == "__main__":
     print(testing())
     print(test_neuron())
-    a = Value(2.0)
-    a = 1 - a
-    print(a)
 # plt.plot(np.arange(-5, 5, 0.2), np.tanh(np.arange(-5, 5, 0.2))) , plt.grid();
 # plt.show()

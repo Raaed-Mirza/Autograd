@@ -47,6 +47,9 @@ class Value:
     def __pow__(self, other):
         other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data ** other.data, (self, other), '^')
+
+        def _backward():
+            self.grad += other.data * (self.data **(other.data - 1)) * out.grad
         return out
 
     def __neg__(self):

@@ -104,6 +104,10 @@ class Value:
         s = 1 / (1 + math.exp(-n))
         out = Value(s, (self, ), 'sigmoid')
 
+        def _backward():
+            self.grad += s * (1 - s) * out.grad
+        out._backward = _backward
+
         return out
 
     def exp(self):

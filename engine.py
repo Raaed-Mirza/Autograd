@@ -12,6 +12,7 @@ class Value:
         return f"Value({self.data})"
 
     def __add__(self, other):
+        other = other if isinstance(other, Value) else Value(other) # if other is not a Value, create a new Value object
         out =  Value(self.data + other.data, (self, other), '+')
 
         def _backward():
@@ -23,6 +24,7 @@ class Value:
 
 
     def __mul__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data * other.data, (self, other), '*')
 
         def _backward():
@@ -33,10 +35,12 @@ class Value:
         return out
 
     def __sub__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data - other.data, (self, other), '-')
         return out
 
-    def __truediv__(self, other):   
+    def __truediv__(self, other): 
+        other = other if isinstance(other, Value) else Value(other)  
         out = Value(self.data / other.data, (self, other), '/')
         return out
 

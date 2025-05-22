@@ -77,5 +77,8 @@ def test_neuron():
 if __name__ == "__main__":
     print(testing())
     print(test_neuron())
+    a = Value(2.0)
+    a = a + 1
+    print(a)
 # plt.plot(np.arange(-5, 5, 0.2), np.tanh(np.arange(-5, 5, 0.2))) , plt.grid();
 # plt.show()

@@ -99,6 +99,13 @@ class Value:
 
         return out
 
+    def sigmoid(self):
+        n = self.data
+        s = 1 / (1 + math.exp(-n))
+        out = Value(s, (self, ), 'sigmoid')
+
+        return out
+
     def exp(self):
         x = self.data
         out = Value(math.exp(x), (self, ), 'exp')

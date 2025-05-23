@@ -13,9 +13,8 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 - Forward and backward pass using computation graph  
 - Custom `Value` class with:
   - Operator overloading (`+`, `-`, `*`, `/`, `**`)
-  - `tanh()` activation
-- Topological sorting for proper gradient flow  
-- Easily extensible with new ops like `ReLU`, `sigmoid`, etc.
+  - `tanh()`, `sigmoid()` activations
+- Topological sorting for proper gradient flow
 
 ---
 ## 📁 Project Structure

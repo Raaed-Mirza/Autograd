@@ -28,7 +28,7 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 
 ## 📦 Installation
 ```bash
-git clone https://github.com/yourusername/micrograd-python.git
+git clone https://github.com/Raaed-Mirza/micrograd-python.git
 ```
 ```bash
 cd micrograd-python

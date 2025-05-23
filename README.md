@@ -28,10 +28,10 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 
 ## 📦 Installation
 ```bash
-git clone https://github.com/Raaed-Mirza/micrograd-python.git
+git clone https://github.com/Raaed-Mirza/Autograd.git
 ```
 ```bash
-cd micrograd-python
+cd Autograd
 ```
 ```bash
 pip install -r requirements.txt

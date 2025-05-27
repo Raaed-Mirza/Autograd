@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from engine import Value
-from neuron import Neuron
+from neuron import Neuron, Layer
 # f.grad = 4.0
 # d.grad = -2.0
 # L.grad = 1.0
@@ -83,7 +83,7 @@ def test_neuron():
 
 def testing_single_neuron():
     x = [Value(2.0), Value(3.0)]
-    n = Neuron(2)
+    n = Layer(2, 3)
     out = n(x)
     return out
 

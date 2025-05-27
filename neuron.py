@@ -1,9 +1,10 @@
 import random
 from engine import Value
+
 class Neuron:
 
     def __init__(self, nin):
-        self.w = [Value(random.uniform(-1, 1)) for _ in range(nout)] # initialize weights for each input
+        self.w = [Value(random.uniform(-1, 1)) for _ in range(nin)] # initialize weights for each input
         self.b = Value(random.uniform(-1,1))
 
     def __call__(self, x):
@@ -15,7 +16,7 @@ class Neuron:
 class Layer:
 
     def __init__(self, nin, nout):
-        self.w = [Value(random.uniform(-1, 1)) for _ in range(nin)] # initialize weights for each input
+        self.w = [Value(random.uniform(-1, 1)) for _ in range(nout)] # initialize weights for each input
         self.b = Value(random.uniform(-1,1))
 
     def __call__(self, x):
@@ -33,4 +34,6 @@ class MLP:
     def __call__(self, x):
         for layer in self.layers:
             x = layer(x)
-        return x
+            if not isinstance(x, list):
+                x = [x]
+        return x[0] if len(x) == 1 else x # return the output of the last layer, which is a single value if there's only one output, or a list of outputs otherwise

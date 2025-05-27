@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from engine import Value
+from neuron import Neuron
 # f.grad = 4.0
 # d.grad = -2.0
 # L.grad = 1.0
@@ -79,8 +80,16 @@ def test_neuron():
     # return n.grad
     # return o
 
+
+def testing_single_neuron():
+    x = [Value(2.0), Value(3.0)]
+    n = Neuron(2)
+    out = n(x)
+    return out
+
 if __name__ == "__main__":
     print(testing())
-    print(test_neuron())
+    print(testing_single_neuron())
+    #print(test_neuron())
 # plt.plot(np.arange(-5, 5, 0.2), np.tanh(np.arange(-5, 5, 0.2))) , plt.grid();
 # plt.show()

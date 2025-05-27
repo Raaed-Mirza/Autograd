@@ -13,7 +13,7 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 - Forward and backward pass using computation graph  
 - Custom `Value` class with:
   - Operator overloading (`+`, `-`, `*`, `/`, `**`)
-  - `tanh()`, `sigmoid()` activations
+  - `tanh()`, `sigmoid()`, `exp()` activations
 - Topological sorting for proper gradient flow
 
 ---
@@ -21,6 +21,7 @@ It builds a computation graph from basic operations (`+`, `*`, `tanh`, etc.) and
 ```
 .
 ├── engine.py         # Core autograd engine with the Value class
+├── neuron.py         # Neuron, Layer, and MLP implementations
 ├── test.py           # Demo script that simulates a simple neuron
 ├── README.md         # Project documentation
 ```

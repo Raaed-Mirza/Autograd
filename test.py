@@ -93,12 +93,18 @@ def testing_single_neuron():
           [0.5, 1.0, 1.0],
           [1.0, 1.0, 1.0]]
 
-    ys = [1.0, -1.0, -1.0, 1.0]
-    ypred = [n([Value(i) for i in x]) for x in xs]
-    #return ypred 
+    for k in range(50):
+        # forward pass
+        ys = [1.0, -1.0, -1.0, 1.0]
+        ypred = [n([Value(i) for i in x]) for x in xs]
+        #return ypred 
 
-    loss = sum([(yout - ygt)**2 for ygt, yout in zip(ys, ypred)])
-    loss.backward()
+        loss = sum([(yout - ygt)**2 for ygt, yout in zip(ys, ypred)])
+
+        # Backward pass
+        for p in n.parameters():
+            p.grad = 0.0
+        loss.backward()
 
     # print("x0 contributions to first neuron output:")
     # for x in xs:
@@ -107,9 +113,14 @@ def testing_single_neuron():
     # for i, w in enumerate(n.layers[0].neurons[0].w):
     #     print(f"w[{i}] = {w.data}, grad = {w.grad}")
 
-    for p in n.parameters():
-        p.data += -0.01 * p.grad
-    
+        # Update parameters
+
+        for p in n.parameters():
+            p.data += -0.01 * p.grad
+
+        print(k, loss.data)
+        
+    print(ypred)
     return n.layers[0].neurons[0].w[0].grad
 
 if __name__ == "__main__":

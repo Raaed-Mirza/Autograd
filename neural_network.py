@@ -10,9 +10,12 @@ class Neuron:
     def __call__(self, x):
         #(w * x) + b
         act = sum((wi*xi for wi, xi in zip(self.w, x)), self.b) # zip the weights and inputs together and compute the activation
-        print("activation before tanh:", act.data)
+        #print("activation before tanh:", act.data)
         out = act.tanh() # apply the tanh activation function
         return out
+
+    def parameters(self):
+        return self.w + [self.b] # return the weights and bias as parameters for optimization
 
 class Layer:
 
@@ -23,6 +26,13 @@ class Layer:
         #(w * x) + b
         out = [neuron(x) for neuron in self.neurons] # call each neuron in the layer with the input x and collect the outputs
         return out if len(out) > 1 else out[0] # return a list of outputs if there are multiple neurons, otherwise return the single output value
+
+    def parameters(self):
+        params = []
+        for neuron in self.neurons:
+            ps = neuron.parameters()
+            params.extend(ps)
+        return params
 
 class MLP:
 
@@ -36,3 +46,6 @@ class MLP:
             if not isinstance(x, list):
                 x = [x]
         return x[0] if len(x) == 1 else x # return the output of the last layer, which is a single value if there's only one output, or a list of outputs otherwise
+
+    def parameters(self):
+        return [param for layer in self.layers for param in layer.parameters()] # collect and return all parameters from all layers

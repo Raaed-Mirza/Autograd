@@ -99,12 +99,12 @@ def testing_single_neuron():
     loss = sum([(yout - ygt)**2 for ygt, yout in zip(ys, ypred)])
     loss.backward()
 
-    print("x0 contributions to first neuron output:")
-    for x in xs:
-        print(f"{x[0]} * {n.layers[0].neurons[0].w[0].data}")
+    # print("x0 contributions to first neuron output:")
+    # for x in xs:
+    #     print(f"{x[0]} * {n.layers[0].neurons[0].w[0].data}")
 
-    for i, w in enumerate(n.layers[0].neurons[0].w):
-        print(f"w[{i}] = {w.data}, grad = {w.grad}")
+    # for i, w in enumerate(n.layers[0].neurons[0].w):
+    #     print(f"w[{i}] = {w.data}, grad = {w.grad}")
 
     return n.layers[0].neurons[0].w[0].grad
 

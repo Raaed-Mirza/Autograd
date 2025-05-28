@@ -62,6 +62,44 @@ o.backward()
 # Gradients
 print(x1.grad, w1.grad, b.grad)
 ```
+## 🎓 Training Example
+
+```python
+from engine import Value
+from neuron import MLP
+
+# Sample inputs and target labels
+xs = [[2.0, 3.0, -1.0],
+      [3.0, -1.0, 0.5],
+      [0.5, 1.0, 1.0],
+      [1.0, 1.0, 1.0]]
+ys = [1.0, -1.0, -1.0, 1.0]
+
+# Initialize a multi-layer perceptron
+n = MLP(3, [4, 4, 1])
+
+# Training loop
+for epoch in range(1000):
+    # Forward pass
+    ypred = [n([Value(i) for i in x]) for x in xs]
+    loss = sum((yout - ygt)**2 for ygt, yout in zip(ys, ypred))
+
+    # Zero gradients
+    for p in n.parameters():
+        p.grad = 0.0
+
+    # Backward pass
+    loss.backward()
+
+    # Update weights
+    for p in n.parameters():
+        p.data += -0.01 * p.grad
+
+    if epoch % 100 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.data:.4f}")
+
+```
+
 ### Running the demo
 ```bash
 python test.py

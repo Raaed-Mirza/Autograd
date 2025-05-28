@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from engine import Value
-from neuron import Neuron, Layer, MLP
+from neural_network import Neuron, Layer, MLP
+import math
 # f.grad = 4.0
 # d.grad = -2.0
 # L.grad = 1.0
@@ -85,10 +86,23 @@ def testing_single_neuron():
     x = [Value(2.0), Value(3.0), Value(-1.0)]
     n = MLP(3, [4, 4, 1])
     out = n(x)
-    return out
+    #return out
+    xs = [[2.0, 3.0, -1.0],
+          [3.0, -1.0, 0.5],
+          [0.5, 1.0, 1.0],
+          [1.0, 1.0, 1.0]]
+
+    ys = [1.0, -1.0, -1.0, 1.0]
+    ypred = [n(x) for x in xs]
+    #return ypred 
+
+    loss = sum([(yout - ygt)**2 for ygt, yout in zip(ys, ypred)])
+    loss._backward()
+
+    return n.layers[0].neurons[0].w[0].grad
 
 if __name__ == "__main__":
-    print(testing())
+    #print(testing())
     print(testing_single_neuron())
     #print(test_neuron())
 # plt.plot(np.arange(-5, 5, 0.2), np.tanh(np.arange(-5, 5, 0.2))) , plt.grid();

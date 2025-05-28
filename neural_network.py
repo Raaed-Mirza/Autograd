@@ -16,14 +16,12 @@ class Neuron:
 class Layer:
 
     def __init__(self, nin, nout):
-        self.w = [Value(random.uniform(-1, 1)) for _ in range(nout)] # initialize weights for each input
-        self.b = Value(random.uniform(-1,1))
+        self.neurons = [Neuron(nin) for _ in range(nout)]
 
     def __call__(self, x):
         #(w * x) + b
-        act = sum((wi*xi for wi, xi in zip(self.w, x)), self.b) # zip the weights and inputs together and compute the activation
-        out = act.tanh() # apply the tanh activation function
-        return out
+        out = [neuron(x) for neuron in self.neurons] # call each neuron in the layer with the input x and collect the outputs
+        return out if len(out) > 1 else out[0] # return a list of outputs if there are multiple neurons, otherwise return the single output value
 
 class MLP:
 

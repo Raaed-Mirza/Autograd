@@ -10,6 +10,7 @@ class Neuron:
     def __call__(self, x):
         #(w * x) + b
         act = sum((wi*xi for wi, xi in zip(self.w, x)), self.b) # zip the weights and inputs together and compute the activation
+        print("activation before tanh:", act.data)
         out = act.tanh() # apply the tanh activation function
         return out
 

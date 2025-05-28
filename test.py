@@ -85,6 +85,7 @@ def test_neuron():
 def testing_single_neuron():
     x = [Value(2.0), Value(3.0), Value(-1.0)]
     n = MLP(3, [4, 4, 1])
+    #return len(n.parameters())
     out = n(x)
     #return out
     xs = [[2.0, 3.0, -1.0],
@@ -106,6 +107,9 @@ def testing_single_neuron():
     # for i, w in enumerate(n.layers[0].neurons[0].w):
     #     print(f"w[{i}] = {w.data}, grad = {w.grad}")
 
+    for p in n.parameters():
+        p.data += -0.01 * p.grad
+    
     return n.layers[0].neurons[0].w[0].grad
 
 if __name__ == "__main__":
